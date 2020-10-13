@@ -47,18 +47,6 @@ const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, 
     );
   }
 
-  if(currentPostsAreLoading){
-    return(
-      <Loader classNameOfWrapper="centered" text={"Loading"} />
-    )
-  }
-
-  if(currentPostsFailedLoading){
-    return(
-      <div className="centered">Failed loading</div>
-    )
-  }
-
   return (
     <div className="App">
        <Header 

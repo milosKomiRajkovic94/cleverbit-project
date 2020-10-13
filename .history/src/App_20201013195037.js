@@ -11,20 +11,18 @@ import {
   Route,
   Switch,
   withRouter,
+  useLocation,
 } from "react-router-dom";
 
 import Header from "./components/HeaderComponents/Header";
 
-import PostsContainer from "./components/PostsComponents/PostsContainer";
-
-import { POSTS, COMMENTS, HOME } from "./constants/urls";
-
-import Loader from "./utils/Loader";
+import { POSTS, COMMENTS } from "./constants/urls";
 
 const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, loadCurrentPostsAction }) => {
 
   const [initialLoadingDone, setInitialLoadingDone] = useState(false);
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     if(!initialLoadingDone){
@@ -40,47 +38,33 @@ const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, 
   function waitingComponent(Component) {
     return (props) => (
       <Suspense
-        fallback={<Loader classNameOfWrapper="centered" text={"Loading"} />}
+        fallback={<Loader classNameOfWrapper="centered" text={t("loading")} />}
       >
         <Component {...props} />
       </Suspense>
     );
   }
 
-  if(currentPostsAreLoading){
-    return(
-      <Loader classNameOfWrapper="centered" text={"Loading"} />
-    )
-  }
-
-  if(currentPostsFailedLoading){
-    return(
-      <div className="centered">Failed loading</div>
-    )
-  }
-
   return (
     <div className="App">
-       <Header 
-        changeLocation={changeLocation}
-       />
+       <Header />
        <Switch>
-        <Route exact path={HOME} component={PostsContainer} />
+        <Route exact path={HOME} component={TopNewsContainer} />
         <Route
           exact
-          path={POSTS}
+          path={TOP_NEWS}
           component={waitingComponent(
             lazy(() =>
-              import("./components/PostsComponents/PostsContainer")
+              import("./components/TopNewsComponents/TopNewsContainer")
             )
           )}
         />
         <Route
           exact
-          path={COMMENTS}
+          path={CATEGORIES}
           component={waitingComponent(
             lazy(() =>
-              import("./components/CommentsComponents/CommentsContainer")
+              import("./components/CategoriesComponents/CategoriesContainer")
             )
           )}
         />

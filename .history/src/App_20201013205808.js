@@ -53,12 +53,6 @@ const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, 
     )
   }
 
-  if(currentPostsFailedLoading){
-    return(
-      <div className="centered">Failed loading</div>
-    )
-  }
-
   return (
     <div className="App">
        <Header 

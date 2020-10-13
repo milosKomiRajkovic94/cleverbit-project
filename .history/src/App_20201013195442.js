@@ -19,8 +19,6 @@ import PostsContainer from "./components/PostsComponents/PostsContainer";
 
 import { POSTS, COMMENTS, HOME } from "./constants/urls";
 
-import Loader from "./utils/Loader";
-
 const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, loadCurrentPostsAction }) => {
 
   const [initialLoadingDone, setInitialLoadingDone] = useState(false);
@@ -47,23 +45,9 @@ const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, 
     );
   }
 
-  if(currentPostsAreLoading){
-    return(
-      <Loader classNameOfWrapper="centered" text={"Loading"} />
-    )
-  }
-
-  if(currentPostsFailedLoading){
-    return(
-      <div className="centered">Failed loading</div>
-    )
-  }
-
   return (
     <div className="App">
-       <Header 
-        changeLocation={changeLocation}
-       />
+       <Header />
        <Switch>
         <Route exact path={HOME} component={PostsContainer} />
         <Route

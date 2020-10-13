@@ -10,8 +10,6 @@ import configureStore from "./store";
 
 import { Provider } from "react-redux";
 
-import { HashRouter as Router } from "react-router-dom";
-
 import "./scss/index.scss";
 
 const store = configureStore();
@@ -19,9 +17,7 @@ const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-      <Router>
-        <App />
-      </Router>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

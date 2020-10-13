@@ -11,20 +11,22 @@ import {
   Route,
   Switch,
   withRouter,
+  useLocation,
 } from "react-router-dom";
 
 import Header from "./components/HeaderComponents/Header";
 
 import PostsContainer from "./components/PostsComponents/PostsContainer";
 
-import { POSTS, COMMENTS, HOME } from "./constants/urls";
+import CommentsContainer from "./components/CommentsComponents/CommentsContainer";
 
-import Loader from "./utils/Loader";
+import { POSTS, COMMENTS, HOME } from "./constants/urls";
 
 const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, loadCurrentPostsAction }) => {
 
   const [initialLoadingDone, setInitialLoadingDone] = useState(false);
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     if(!initialLoadingDone){
@@ -47,23 +49,9 @@ const App = ({ currentPosts, currentPostsAreLoading, currentPostsFailedLoading, 
     );
   }
 
-  if(currentPostsAreLoading){
-    return(
-      <Loader classNameOfWrapper="centered" text={"Loading"} />
-    )
-  }
-
-  if(currentPostsFailedLoading){
-    return(
-      <div className="centered">Failed loading</div>
-    )
-  }
-
   return (
     <div className="App">
-       <Header 
-        changeLocation={changeLocation}
-       />
+       <Header />
        <Switch>
         <Route exact path={HOME} component={PostsContainer} />
         <Route
