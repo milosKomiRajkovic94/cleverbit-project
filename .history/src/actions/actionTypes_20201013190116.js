@@ -1,1 +1,0 @@
-export default GET_CURRENT_POSTS = "GET_CURRENT_POSTS";

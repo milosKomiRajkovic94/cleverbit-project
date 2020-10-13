@@ -1,1 +1,0 @@
-import { GET_CURRENT_POSTS } from "./actionTypes";
